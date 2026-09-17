@@ -46,22 +46,78 @@ export default function Gallery() {
 
   const slideCount = SLIDES.length;
 
+  const slideAt = useCallback((): number => {
+      const track = trackRef.current;
+      if (!track) return 0;
+      const trackRect = track.getBoundingClientRect();
+      const viewCenter = trackRect.left + trackRect.width / 2;
+      let best = 0;
+      let bestDist = Infinity;
+      Array.from(track.children).forEach((child, i) => {
+        const rect = (child as HTMLElement).getBoundingClientRect();
+        const dist = Math.abs(rect.left + rect.width / 2 - viewCenter);
+        if (dist < bestDist) {
+          bestDist = dist;
+          best = i;
+        }
+      });
+      return best;
+    },
+    [],
+  );
+
+  const snapLeft = useCallback(
+    (index: number): number => {
+      const track = trackRef.current;
+      const child = track && track.children[index] as HTMLElement | undefined;
+      if (!track || !child) return 0;
+      const trackRect = track.getBoundingClientRect();
+      const rect = child.getBoundingClientRect();
+      const unscrolledLeft = rect.left - trackRect.left + track.scrollLeft;
+      return unscrolledLeft + rect.width / 2 - trackRect.width / 2;
+    },
+    [],
+  );
+
   const goTo = useCallback(
     (index: number) => {
-      const el = trackRef.current;
-      if (!el) return;
+      const track = trackRef.current;
+      if (!track) return;
       const bounded = Math.max(0, Math.min(index, slideCount - 1));
-      el.scrollTo({ left: bounded * el.clientWidth, behavior: "smooth" });
+      const target = snapLeft(bounded);
+      const distance = Math.abs(target - track.scrollLeft);
+      track.scrollTo({
+        left: target,
+        behavior: distance >= track.clientWidth * 2 ? "auto" : "smooth",
+      });
     },
-    [slideCount],
+    [slideCount, snapLeft],
   );
+
+  const goNext = useCallback(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    const current = slideAt();
+    const wraps = current === slideCount - 1;
+    const nextIndex = (current + 1) % slideCount;
+    track.scrollTo({ left: snapLeft(nextIndex), behavior: wraps ? "auto" : "smooth" });
+  }, [slideCount, slideAt, snapLeft]);
+
+  const goPrev = useCallback(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    const current = slideAt();
+    const wraps = current === 0;
+    const prevIndex = (current - 1 + slideCount) % slideCount;
+    track.scrollTo({ left: snapLeft(prevIndex), behavior: wraps ? "auto" : "smooth" });
+  }, [slideCount, slideAt, snapLeft]);
 
   const handleScroll = useCallback(() => {
     const el = trackRef.current;
     if (!el) return;
-    const index = Math.round(el.scrollLeft / el.clientWidth);
-    if (index !== active) setActive(Math.max(0, Math.min(index, slideCount - 1)));
-  }, [active, slideCount]);
+    const index = slideAt();
+    if (index !== active) setActive(index);
+  }, [active, slideAt]);
 
   useEffect(() => {
     const el = trackRef.current;
@@ -110,7 +166,7 @@ export default function Gallery() {
           <div
             ref={trackRef}
             tabIndex={0}
-            className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 outline-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 outline-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             aria-label="Scrollable photo gallery, use left and right arrow keys to browse"
           >
             {SLIDES.map((slide, i) => (
@@ -134,10 +190,9 @@ export default function Gallery() {
           <div className="mt-4 flex items-center justify-center gap-6">
             <button
               type="button"
-              onClick={() => goTo(active - 1)}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-brand bg-white text-brand transition-colors hover:bg-brand hover:text-white disabled:opacity-40"
+              onClick={goPrev}
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-brand bg-white text-brand transition-colors hover:bg-brand hover:text-white"
               aria-label="Previous photo"
-              disabled={active === 0}
             >
               <svg
                 className="h-5 w-5"
@@ -169,10 +224,9 @@ export default function Gallery() {
 
             <button
               type="button"
-              onClick={() => goTo(active + 1)}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-brand bg-white text-brand transition-colors hover:bg-brand hover:text-white disabled:opacity-40"
+              onClick={goNext}
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-brand bg-white text-brand transition-colors hover:bg-brand hover:text-white"
               aria-label="Next photo"
-              disabled={active === slideCount - 1}
             >
               <svg
                 className="h-5 w-5"

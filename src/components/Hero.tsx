@@ -1,5 +1,6 @@
 import { BUSINESS } from "../lib/business";
 import WhatsAppIcon from "./WhatsAppIcon";
+import Stars from "./Stars";
 import { useEnquiry } from "../context/enquiry";
 
 export default function Hero() {
@@ -15,7 +16,14 @@ export default function Hero() {
         />
         <div className="absolute inset-0 bg-black/55" />
         <div className="container-site absolute inset-0 flex flex-col items-center justify-center text-center">
-          <h1 className="h1-display max-w-3xl text-white sm:text-5xl md:text-6xl">
+          <p className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-brand/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-sm sm:text-sm">
+            Kitchen Installation &amp; Renovation
+            <span className="hidden text-white/70 sm:inline">&middot;</span>
+            <span className="rounded-full bg-paper/20 px-2.5 py-0.5 text-white/90">
+              Bonnyrigg
+            </span>
+          </p>
+          <h1 className="h1-display mt-5 max-w-3xl text-white sm:text-5xl md:text-6xl">
             A kitchen you&rsquo;ll love coming home to
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
@@ -25,13 +33,16 @@ export default function Hero() {
           <button
             type="button"
             onClick={openEnquiry}
-            className="btn-cta mt-8 w-full max-w-md px-7 py-4 text-base sm:w-auto sm:max-w-none sm:px-8 sm:py-3.5 sm:text-lg"
+            className="btn-cta mt-8 w-auto px-6 py-3 text-sm sm:px-8 sm:py-3.5 sm:text-lg"
           >
             <WhatsAppIcon className="h-5 w-5" />
             Get a kitchen quote on WhatsApp
           </button>
-          <p className="mt-4 text-sm text-white/70">
-            Rated {BUSINESS.rating} on Google &middot; {BUSINESS.reviewCount} reviews
+          <p className="mt-4 flex items-center justify-center gap-2 text-sm text-white/80">
+            <Stars className="h-4 w-4" />
+            <span>
+              Rated {BUSINESS.rating} on Google &middot; {BUSINESS.reviewCount} reviews
+            </span>
           </p>
         </div>
       </div>
