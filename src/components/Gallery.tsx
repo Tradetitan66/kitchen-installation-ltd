@@ -33,6 +33,10 @@ const SLIDES = [
     src: "/images/gallery-8.webp",
     alt: "A recently fitted kitchen with shaker-style doors and pendant lighting",
   },
+  {
+    src: "/images/gallery-9.webp",
+    alt: "A fitted kitchen with units, worktop and pendant lighting installed",
+  },
 ] as const;
 
 export default function Gallery() {

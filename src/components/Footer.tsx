@@ -48,7 +48,7 @@ export default function Footer() {
               href={whatsappLink("Hi Kitchen Installation Team, I'd like a kitchen quote.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-cta px-6 py-3 text-base"
+              className="btn-cta w-full py-4 text-base md:w-auto md:py-3 lg:px-6"
             >
               <WhatsAppIcon className="h-5 w-5" />
               Get a kitchen quote

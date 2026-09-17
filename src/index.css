@@ -38,6 +38,12 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+@media (max-width: 767px) {
+  body {
+    padding-bottom: 5.5rem;
+  }
+}
+
 ::selection {
   background-color: var(--color-brand);
   color: #fff;

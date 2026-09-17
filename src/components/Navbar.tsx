@@ -1,4 +1,5 @@
 import { whatsappLink } from "../lib/business";
+import WhatsAppIcon from "./WhatsAppIcon";
 
 const NAV_LINKS = [
   { href: "#about", label: "About" },
@@ -48,8 +49,9 @@ export default function Navbar() {
           href={whatsappLink("Hi Kitchen Installation Team, I'd like a kitchen quote.")}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-cta px-4 py-2 text-sm md:hidden"
+          className="btn-cta px-4 py-2.5 text-sm md:hidden"
         >
+          <WhatsAppIcon className="h-4 w-4" />
           WhatsApp
         </a>
       </nav>

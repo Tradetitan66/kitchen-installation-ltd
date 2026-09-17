@@ -6,7 +6,7 @@ export default function Hero() {
     <section id="top" className="relative" aria-label="Introduction">
       <div className="relative h-[78vh] max-h-[640px] min-h-[480px] w-full overflow-hidden">
         <img
-          src="/images/hero.webp"
+          src="/images/hero-kitchen.png"
           alt="A recently fitted kitchen designed and installed by Kitchen Installation Team in Bonnyrigg"
           className="absolute inset-0 h-full w-full object-cover"
           fetchPriority="high"
@@ -24,7 +24,7 @@ export default function Hero() {
             href={whatsappLink("Hi Kitchen Installation Team, I'd like a kitchen quote.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-cta mt-8 px-7 py-3.5 text-base sm:px-8 sm:text-lg"
+            className="btn-cta mt-8 w-full max-w-md px-7 py-4 text-base sm:w-auto sm:max-w-none sm:px-8 sm:py-3.5 sm:text-lg"
           >
             <WhatsAppIcon className="h-5 w-5" />
             Get a kitchen quote on WhatsApp

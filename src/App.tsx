@@ -6,6 +6,7 @@ import Process from "./components/Process";
 import Trust from "./components/Trust";
 import EnquiryForm from "./components/EnquiryForm";
 import Footer from "./components/Footer";
+import MobileWhatsBar from "./components/MobileWhatsBar";
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <EnquiryForm />
       </main>
       <Footer />
+      <MobileWhatsBar />
     </>
   );
 }
