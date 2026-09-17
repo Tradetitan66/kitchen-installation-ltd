@@ -8,12 +8,8 @@ export default function Hero() {
   return (
     <section id="top" className="section-pad bg-white" aria-label="Introduction">
       <div className="container-site flex flex-col items-center text-center">
-        <p className="inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-white sm:text-sm">
+        <p className="rounded-full border border-brand/30 bg-brand px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-white sm:text-sm">
           Kitchen Installation &amp; Renovation
-          <span className="hidden text-white/70 sm:inline">&middot;</span>
-          <span className="rounded-full bg-white/25 px-2.5 py-0.5 text-white">
-            Bonnyrigg
-          </span>
         </p>
         <h1 className="h1-display mt-5 max-w-3xl text-4xl text-ink sm:text-5xl md:text-6xl">
           A kitchen you&rsquo;ll love coming home to
