@@ -30,12 +30,12 @@ export default function Hero() {
           <WhatsAppIcon className="h-5 w-5" />
           Get a kitchen quote on WhatsApp
         </button>
-        <p className="mt-4 flex items-center justify-center gap-2 text-sm text-ink-muted">
+        <div className="mt-4 flex flex-col items-center gap-1.5 text-sm text-ink-muted">
           <Stars className="h-4 w-4" />
           <span>
             Rated {BUSINESS.rating} on Google &middot; {BUSINESS.reviewCount} reviews
           </span>
-        </p>
+        </div>
       </div>
     </section>
   );
