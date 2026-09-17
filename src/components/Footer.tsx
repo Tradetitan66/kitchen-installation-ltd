@@ -1,7 +1,9 @@
-import { BUSINESS, whatsappLink } from "../lib/business";
+import { BUSINESS } from "../lib/business";
 import WhatsAppIcon from "./WhatsAppIcon";
+import { useEnquiry } from "../context/enquiry";
 
 export default function Footer() {
+  const { openEnquiry } = useEnquiry();
   return (
     <footer className="bg-dark text-white">
       <div className="container-site py-14">
@@ -44,15 +46,14 @@ export default function Footer() {
           </div>
 
           <div className="md:justify-self-end">
-            <a
-              href={whatsappLink("Hi Kitchen Installation Team, I'd like a kitchen quote.")}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={openEnquiry}
               className="btn-cta w-full py-4 text-base md:w-auto md:py-3 lg:px-6"
             >
               <WhatsAppIcon className="h-5 w-5" />
               Get a kitchen quote
-            </a>
+            </button>
             <p className="mt-4 text-xs text-white/60">
               Tradesman &middot; {BUSINESS.phoneDisplay}
             </p>

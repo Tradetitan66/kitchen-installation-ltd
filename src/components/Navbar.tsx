@@ -1,5 +1,4 @@
-import { whatsappLink } from "../lib/business";
-import WhatsAppIcon from "./WhatsAppIcon";
+import { useEnquiry } from "../context/enquiry";
 
 const NAV_LINKS = [
   { href: "#about", label: "About" },
@@ -9,6 +8,7 @@ const NAV_LINKS = [
 ] as const;
 
 export default function Navbar() {
+  const { openEnquiry } = useEnquiry();
   return (
     <header className="sticky top-0 z-50 bg-dark text-white shadow-[0_1px_0_rgba(255,255,255,0.08)]">
       <nav
@@ -35,25 +35,14 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-          <a
-            href={whatsappLink("Hi Kitchen Installation Team, I'd like a kitchen quote.")}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
+            onClick={openEnquiry}
             className="btn-cta px-4 py-2 text-sm"
           >
             Get a quote
-          </a>
+          </button>
         </div>
-
-        <a
-          href={whatsappLink("Hi Kitchen Installation Team, I'd like a kitchen quote.")}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-cta px-4 py-2.5 text-sm md:hidden"
-        >
-          <WhatsAppIcon className="h-4 w-4" />
-          WhatsApp
-        </a>
       </nav>
     </header>
   );

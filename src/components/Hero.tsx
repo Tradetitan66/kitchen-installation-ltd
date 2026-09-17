@@ -1,7 +1,9 @@
-import { BUSINESS, whatsappLink } from "../lib/business";
+import { BUSINESS } from "../lib/business";
 import WhatsAppIcon from "./WhatsAppIcon";
+import { useEnquiry } from "../context/enquiry";
 
 export default function Hero() {
+  const { openEnquiry } = useEnquiry();
   return (
     <section id="top" className="relative" aria-label="Introduction">
       <div className="relative h-[78vh] max-h-[640px] min-h-[480px] w-full overflow-hidden">
@@ -20,15 +22,14 @@ export default function Hero() {
             Kitchen installation and full renovations in Bonnyrigg, Midlothian
             planned, fitted and finished by one team.
           </p>
-          <a
-            href={whatsappLink("Hi Kitchen Installation Team, I'd like a kitchen quote.")}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
+            onClick={openEnquiry}
             className="btn-cta mt-8 w-full max-w-md px-7 py-4 text-base sm:w-auto sm:max-w-none sm:px-8 sm:py-3.5 sm:text-lg"
           >
             <WhatsAppIcon className="h-5 w-5" />
             Get a kitchen quote on WhatsApp
-          </a>
+          </button>
           <p className="mt-4 text-sm text-white/70">
             Rated {BUSINESS.rating} on Google &middot; {BUSINESS.reviewCount} reviews
           </p>

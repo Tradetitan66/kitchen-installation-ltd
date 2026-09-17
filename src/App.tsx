@@ -7,10 +7,12 @@ import Trust from "./components/Trust";
 import EnquiryForm from "./components/EnquiryForm";
 import Footer from "./components/Footer";
 import MobileWhatsBar from "./components/MobileWhatsBar";
+import WhatsAppModal from "./components/WhatsAppModal";
+import { EnquiryProvider } from "./context/enquiry";
 
 export default function App() {
   return (
-    <>
+    <EnquiryProvider>
       <Navbar />
       <main>
         <Hero />
@@ -22,6 +24,7 @@ export default function App() {
       </main>
       <Footer />
       <MobileWhatsBar />
-    </>
+      <WhatsAppModal />
+    </EnquiryProvider>
   );
 }
